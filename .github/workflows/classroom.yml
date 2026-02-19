@@ -21,10 +21,8 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: "Valor Maximo Estandar"
-        setup-command: "dotnet build"
-        # Compilamos primero para que el tiempo de compilación no afecte la métrica del algoritmo
+        # Se eliminó la duplicación de setup-command
         setup-command: "dotnet build -c Release"
-        # Usamos /usr/bin/time -v para ejecutar el binario ya compilado
         command: "/usr/bin/time -v ./bin/Release/net10.0/TestArreglo"
         input: "5\n10 20 5 8 15"
         expected-output: "20"
@@ -38,9 +36,7 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: "Maximo con Negativos"
-        # Compilamos primero para que el tiempo de compilación no afecte la métrica del algoritmo
         setup-command: "dotnet build -c Release"
-        # Usamos /usr/bin/time -v para ejecutar el binario ya compilado
         command: "/usr/bin/time -v ./bin/Release/net10.0/TestArreglo"
         input: "3\n-10 -5 -30"
         expected-output: "-5"
@@ -54,9 +50,7 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: "Arreglo de un elemento"
-        # Compilamos primero para que el tiempo de compilación no afecte la métrica del algoritmo
         setup-command: "dotnet build -c Release"
-        # Usamos /usr/bin/time -v para ejecutar el binario ya compilado
         command: "/usr/bin/time -v ./bin/Release/net10.0/TestArreglo"
         input: "1\n99"
         expected-output: "99"
@@ -64,7 +58,6 @@ jobs:
         timeout: 10
         max-score: 30
 
-    # Reportador: Es el que suma los puntos y los envía a Classroom
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
